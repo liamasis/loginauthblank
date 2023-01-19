@@ -1,6 +1,14 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import Login from "./Login";
 import React from "react";
+jest.mock("axios", () => ({
+  __esModule: true,
+  default: {
+    get: () => ({
+      data: { id: 1, name: "Geffeory" },
+    }),
+  },
+}));
 
 test("username input shoudld be rendered", () => {
   render(<Login />);
@@ -54,7 +62,7 @@ test("password input shoudld change", () => {
   expect(passwordInput.value).toBe(passwordTest);
 });
 
-test("", () => {
+test("check if button becomes not disabled", () => {
   render(<Login />);
   const passwordInput = screen.getByPlaceholderText(/password/i);
   const userInputEl = screen.getByPlaceholderText(/username/i);
@@ -65,4 +73,41 @@ test("", () => {
   fireEvent.change(userInputEl, { target: { value: testValue } });
 
   expect(buttonInputEl).not.toBeDisabled();
+});
+
+test("check if please wait isn't written on button", () => {
+  render(<Login />);
+  const buttonEl = screen.getByRole("button");
+  expect(buttonEl).not.toHaveTextContent(/please wait/i);
+});
+
+test("check if please wait isn't written on button", async () => {
+  render(<Login />);
+  const buttonEl = screen.getByRole("button");
+  const passwordInput = screen.getByPlaceholderText(/password/i);
+  const userInputEl = screen.getByPlaceholderText(/username/i);
+
+  const testValue = "test";
+
+  fireEvent.change(passwordInput, { target: { value: testValue } });
+  fireEvent.change(userInputEl, { target: { value: testValue } });
+  fireEvent.click(buttonEl);
+
+  await waitFor(() => expect(buttonEl).not.toHaveTextContent(/please wait/i));
+});
+
+test("username should be rendered", async () => {
+  render(<Login />);
+  const buttonEl = screen.getByRole("button");
+  const passwordInput = screen.getByPlaceholderText(/password/i);
+  const userInputEl = screen.getByPlaceholderText(/username/i);
+
+  const testValue = "test";
+
+  fireEvent.change(passwordInput, { target: { value: testValue } });
+  fireEvent.change(userInputEl, { target: { value: testValue } });
+  fireEvent.click(buttonEl);
+
+  const userItem = await screen.findByText("Geffeory");
+  expect(userItem).toBeInTheDocument();
 });

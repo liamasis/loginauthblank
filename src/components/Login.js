@@ -5,10 +5,12 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(false);
   const handleClick = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
-      const { data } = axios.get(
+      const { data } = await axios.get(
         "https://jsonplaceholder.typicode.com/users/1"
       );
       console.log(data);
@@ -16,6 +18,7 @@ const Login = () => {
     } catch {
       setError(true);
     }
+    setLoading(false);
   };
   return (
     <div className="constainer">
@@ -34,7 +37,7 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button disabled={!password || !username} onClick={handleClick}>
-          Login
+          {loading ? "Please wait" : "Login"}
         </button>
         <span
           data-testid={"error"}
