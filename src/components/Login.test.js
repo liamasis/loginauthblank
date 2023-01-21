@@ -3,4 +3,17 @@ import Login from "./Login";
 test("check if username field has rendered", () => {
   render(<Login />);
   const usernameField = screen.getByPlaceholderText(/username/i);
+  expect(usernameField).toBeInTheDocument();
+});
+
+test("check if password field has rendered", () => {
+  render(<Login />);
+  const passwordField = screen.getByPlaceholderText(/password/i);
+  expect(passwordField).toBeInTheDocument();
+});
+
+test("check if button has rendered", () => {
+  render(<Login />);
+  const buttonEle = screen.getByRole("button");
+  expect(buttonEle).toBeInTheDocument();
 });
