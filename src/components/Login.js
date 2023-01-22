@@ -22,7 +22,7 @@ const Login = () => {
   };
   return (
     <div className="constainer">
-      <h1>{user.name}</h1>
+      <h1 data-testid="user">{user.name}</h1>
       <form action="">
         <input
           type="text"

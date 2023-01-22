@@ -1,11 +1,12 @@
 import { fireEvent, render, screen } from "@testing-library/react";
+import { click } from "@testing-library/user-event/dist/click";
 import Login from "./Login";
 jest.mock("jest", () => ({
   __esModule: true,
   default: {
-    get: (() =>{
-      data: { id: 1, name: "liam"}
-    })
+    get: () => ({
+      data: { id: 1, name: "liam" },
+    }),
   },
 }));
 test("check if username field has rendered", () => {
@@ -90,5 +91,22 @@ test("button input shoudld be not be loading after render ", () => {
   const test = "test";
   fireEvent.change(passwordField, { target: { value: test } });
   fireEvent.change(usernameField, { target: { value: test } });
+  fireEvent.click(buttonInputEl);
   expect(buttonInputEl).not.toHaveTextContent(/loading/i);
+});
+
+test("the customers name should be rendered at end ", () => {
+  render(<Login />);
+  const passwordField = screen.getByPlaceholderText(/password/i);
+  const usernameField = screen.getByPlaceholderText(/username/i);
+  const buttonInputEl = screen.getByRole("button");
+  const test = "test";
+  fireEvent.change(passwordField, { target: { value: test } });
+  fireEvent.change(usernameField, { target: { value: test } });
+  fireEvent.click(buttonInputEl);
+  const userField = screen.getByTestId("user")
+
+  expect(userField).toBe(() => await {
+    "liam"
+  })
 });
