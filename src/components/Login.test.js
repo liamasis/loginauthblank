@@ -4,7 +4,7 @@ jest.mock("jest", () => ({
   __esModule: true,
   default: {
     get: (() =>{
-      data{ name: "liam"}
+      data: { id: 1, name: "liam"}
     })
   },
 }));
