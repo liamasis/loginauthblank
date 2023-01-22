@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import React from "react";
 
 const Login = () => {
@@ -11,10 +12,10 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const { data } = await fetch(
+      const { data } = await axios.get(
         "https://jsonplaceholder.typicode.com/users/1"
       );
-      setUsername(data);
+      setUser(data);
     } catch {
       setError(true);
     }
@@ -22,6 +23,7 @@ const Login = () => {
   };
   return (
     <div className="constainer">
+      <h1>{user.name}</h1>
       <form action="">
         <input
           type="text"
