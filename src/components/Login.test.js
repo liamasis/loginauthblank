@@ -18,6 +18,24 @@ test("check if button has rendered", () => {
   expect(buttonEle).toBeInTheDocument();
 });
 
+test("username input shoudld be empty", () => {
+  render(<Login />);
+  const buttonInputEl = screen.getByPlaceholderText(/username/i);
+  expect(buttonInputEl.value).toBe("");
+});
+
+test("password input shoudld be empty", () => {
+  render(<Login />);
+  const passwordEl = screen.getByPlaceholderText(/username/i);
+  expect(passwordEl.value).toBe("");
+});
+
+test("button input shoudld be disabled", () => {
+  render(<Login />);
+  const buttonInputEl = screen.getByRole("button");
+  expect(buttonInputEl).toBeDisabled();
+});
+
 test("check if error message not there on load", () => {
   render(<Login />);
   const errormsg = screen.getByTestId("errormsg");
