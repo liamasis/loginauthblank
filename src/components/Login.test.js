@@ -104,7 +104,7 @@ test("the customers name should be rendered at end ", async () => {
   fireEvent.change(passwordField, { target: { value: test1 } });
   fireEvent.change(usernameField, { target: { value: test1 } });
   fireEvent.click(buttonInputEl);
-  const userField = await screen.getByText("test");
-
+  const userField = await screen.findByText("liam");
+  //
   expect(userField).toBeInTheDocument();
 });
