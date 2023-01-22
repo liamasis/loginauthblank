@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useState, React } from "react";
 import axios from "axios";
-import React from "react";
 
 const Login = () => {
   const [error, setError] = useState(false);
@@ -43,7 +42,7 @@ const Login = () => {
       </form>
       <span
         testdata-id="errormsg"
-        style={{ visibility: error ? "false" : "true" }}
+        style={{ visibility: error ? "visible" : "hidden" }}
       >
         There has been an error
       </span>
