@@ -83,7 +83,7 @@ test("check if username/password makes button active", () => {
   fireEvent.change(usernameField, { target: { value: test } });
   expect(buttonInputEl).not.toBeDisabled();
 });
-test("button input shoudld be not be loading after render ", () => {
+test("button input shoudld be not be loading after render ", async () => {
   render(<Login />);
   const passwordField = screen.getByPlaceholderText(/password/i);
   const usernameField = screen.getByPlaceholderText(/username/i);
@@ -95,7 +95,7 @@ test("button input shoudld be not be loading after render ", () => {
   expect(buttonInputEl).not.toHaveTextContent(/loading/i);
 });
 
-test("the customers name should be rendered at end ", () => {
+test("the customers name should be rendered at end ", async () => {
   render(<Login />);
   const passwordField = screen.getByPlaceholderText(/password/i);
   const usernameField = screen.getByPlaceholderText(/username/i);
@@ -104,9 +104,7 @@ test("the customers name should be rendered at end ", () => {
   fireEvent.change(passwordField, { target: { value: test } });
   fireEvent.change(usernameField, { target: { value: test } });
   fireEvent.click(buttonInputEl);
-  const userField = screen.getByTestId("user")
+  const userField = await screen.getByText("liam");
 
-  expect(userField).toBe(() => await {
-    "liam"
-  })
+  expect(userField).toBeInTheDocument();
 });
