@@ -17,3 +17,9 @@ test("check if button has rendered", () => {
   const buttonEle = screen.getByRole("button");
   expect(buttonEle).toBeInTheDocument();
 });
+
+test("check if error message not there on load", () => {
+  render(<Login />);
+  const errormsg = screen.getByTestId("errormsg");
+  expect(errormsg).not.tobe();
+});

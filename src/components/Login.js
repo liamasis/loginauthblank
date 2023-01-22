@@ -41,7 +41,7 @@ const Login = () => {
         </button>
       </form>
       <span
-        testdata-id="errormsg"
+        data-testid="errormsg"
         style={{ visibility: error ? "visible" : "hidden" }}
       >
         There has been an error
