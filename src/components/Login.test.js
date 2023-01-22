@@ -1,5 +1,13 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import Login from "./Login";
+jest.mock("jest", () => ({
+  __esModule: true,
+  default: {
+    get: (() =>{
+      data{ name: "liam"}
+    })
+  },
+}));
 test("check if username field has rendered", () => {
   render(<Login />);
   const usernameField = screen.getByPlaceholderText(/username/i);
@@ -49,6 +57,11 @@ test("username should change", () => {
   fireEvent.change(usernameField, { target: { value: test } });
 
   expect(usernameField.value).toBe(test);
+});
+test("check if please wait isn't written on button", () => {
+  render(<Login />);
+  const buttonEl = screen.getByRole("button");
+  expect(buttonEl).not.toHaveTextContent(/please wait/i);
 });
 
 test("check if password field has rendered", () => {
