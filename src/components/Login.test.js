@@ -71,6 +71,11 @@ test("check if username/password makes button active", () => {
 });
 test("button input shoudld be not be loading after render ", () => {
   render(<Login />);
+  const passwordField = screen.getByPlaceholderText(/password/i);
+  const usernameField = screen.getByPlaceholderText(/username/i);
   const buttonInputEl = screen.getByRole("button");
-  expect(buttonInputEl.value).not.toBe("loading");
+  const test = "test";
+  fireEvent.change(passwordField, { target: { value: test } });
+  fireEvent.change(usernameField, { target: { value: test } });
+  expect(buttonInputEl).not.toHaveTextContent(/loading/i);
 });
