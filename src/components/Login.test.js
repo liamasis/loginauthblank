@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { click } from "@testing-library/user-event/dist/click";
 import Login from "./Login";
 jest.mock("axios", () => ({
@@ -92,7 +92,7 @@ test("button input shoudld be not be loading after render ", async () => {
   fireEvent.change(passwordField, { target: { value: test } });
   fireEvent.change(usernameField, { target: { value: test } });
   fireEvent.click(buttonInputEl);
-  expect(buttonInputEl).not.toHaveTextContent(/loading/i);
+  await waitFor(() => expect(buttonInputEl).not.toHaveTextContent(/loading/i));
 });
 
 test("the customers name should be rendered at end ", async () => {
@@ -100,11 +100,11 @@ test("the customers name should be rendered at end ", async () => {
   const passwordField = screen.getByPlaceholderText(/password/i);
   const usernameField = screen.getByPlaceholderText(/username/i);
   const buttonInputEl = screen.getByRole("button");
-  const test = "test";
-  fireEvent.change(passwordField, { target: { value: test } });
-  fireEvent.change(usernameField, { target: { value: test } });
+  const test1 = "test";
+  fireEvent.change(passwordField, { target: { value: test1 } });
+  fireEvent.change(usernameField, { target: { value: test1 } });
   fireEvent.click(buttonInputEl);
-  const userField = await screen.getByText("liam");
+  const userField = await screen.getByText("test");
 
   expect(userField).toBeInTheDocument();
 });
