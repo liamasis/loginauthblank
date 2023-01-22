@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { click } from "@testing-library/user-event/dist/click";
 import Login from "./Login";
-jest.mock("jest", () => ({
+jest.mock("axios", () => ({
   __esModule: true,
   default: {
     get: () => ({
