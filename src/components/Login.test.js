@@ -21,5 +21,5 @@ test("check if button has rendered", () => {
 test("check if error message not there on load", () => {
   render(<Login />);
   const errormsg = screen.getByTestId("errormsg");
-  expect(errormsg).not.tobe();
+  expect(errormsg).not.toBeVisible();
 });
