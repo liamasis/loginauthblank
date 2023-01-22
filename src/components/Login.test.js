@@ -58,3 +58,14 @@ test("check if password field has rendered", () => {
   fireEvent.change(passwordField, { target: { value: test } });
   expect(passwordField.value).toBe(test);
 });
+
+test("check if username/password makes button active", () => {
+  render(<Login />);
+  const passwordField = screen.getByPlaceholderText(/password/i);
+  const usernameField = screen.getByPlaceholderText(/username/i);
+  const buttonInputEl = screen.getByRole("button");
+  const test = "test";
+  fireEvent.change(passwordField, { target: { value: test } });
+  fireEvent.change(usernameField, { target: { value: test } });
+  expect(buttonInputEl).not.toBeDisabled();
+});
