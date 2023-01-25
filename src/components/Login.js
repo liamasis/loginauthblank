@@ -41,7 +41,10 @@ const Login = () => {
         <button disabled={!password || !username} onClick={handleClick}>
           {loading ? "Loading" : "Login"}
         </button>
-        <span style={{ visibility: error ? "visible" : "hidden" }}>
+        <span
+          data-testid="error"
+          style={{ visibility: error ? "visible" : "hidden" }}
+        >
           There has been a mistake
         </span>
       </form>
