@@ -7,9 +7,22 @@ const Login = () => {
   return (
     <div className="constainer">
       <form action="">
-        <input type="text" placeholder="username" value={username} onChange={(e) => setUsername(e.target.value)} />
-        <input type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <input
+          type="text"
+          placeholder="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <button disabled={!password || !username}>Login</button>
+        <span style={{ visibility: error ? "visible" : "hidden" }}>
+          There has been a mistake
+        </span>
       </form>
     </div>
   );
