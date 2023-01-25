@@ -10,13 +10,17 @@ const Login = () => {
   const [user, setUser] = useState({});
   const handleClick = async (e) => {
     e.preventDefault();
+    setLoading(true);
     console.log("clicked");
     try {
       const { data } = await axios.get(
         "https://jsonplaceholder.typicode.com/users/1"
       );
       setUser(data);
-    } catch {}
+    } catch {
+      setError(true);
+    }
+    setLoading(false);
   };
   return (
     <div className="constainer">
